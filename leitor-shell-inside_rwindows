@@ -1,0 +1,33 @@
+# Script leitor de notas fiscais. Escrito para um shell rodando em ambiente win32. Bastante instável. :) 
+
+# Meus alias
+echo=./bin/echo.exe
+cat=./bin/cat.exe
+grep=./bin/grep.exe
+# sed=./bin/sed.exe
+cut=./bin/cut.exe
+# sleep=./bin/sleep.exe
+
+
+# Função principal: 
+MAESTRO() {
+	$echo "---------------------------------"
+	$echo "	     M A I N - M E N U"
+	$echo "---------------------------------"
+	$echo "A nota:"
+	read NF
+	# $echo $NF| $wc -m => Nunca se sabe quando vai precisar disso
+	ID0=$($echo $NF | $cut  -b29-34)
+	ID1=$($grep $ID0 Arq0.txt)
+	$echo $ID1
+	$grep $( $echo $ID1 | $cut -b51-57 ) DataBase.txt
+			}
+# loooooooop
+while :
+	do
+		case $NF in
+			q) break ;;
+			*) MAESTRO ;;
+		esac
+	done
+
