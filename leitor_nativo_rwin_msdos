@@ -1,0 +1,37 @@
+REM Desenvolvedor: Rodrigo Leite Valentin
+REM Criação: 01/01/2012
+REM Licença: GNU-GPL
+REM Mesma função da versão em "shell.exe", porém escrito direta e porcamente em batch script. Ainda depende de uns "nativos" unix,
+REM porém muito menos que o irmão dele.
+@ECHO OFF
+REM .-- Prepare the Command Processor
+SETLOCAL ENABLEEXTENSIONS
+SETLOCAL ENABLEDELAYEDEXPANSION
+COLOR A
+REM Finaliza o programa:
+
+
+:menuLOOP
+echo.
+echo.= Menu =================================================
+echo.
+echo "Escaneie o código de barra da NF:"
+echo .
+echo.&set /p NF=Make a choice or hit "q" to quit:
+REM SET NF=
+IF NOT "%NF%"== "q" ( GOTO:HardWork ) ELSE ( GOTO:quit )
+
+GOTO:menuLOOP
+
+:quit
+exit
+
+:HardWork
+.\bin\echo.exe "%NF%"| .\bin\cut.exe -b29-34 | .\bin\grep.exe DataBank.txt
+echo 
+
+
+endlocal
+
+GOTO:menuLOOP
+
